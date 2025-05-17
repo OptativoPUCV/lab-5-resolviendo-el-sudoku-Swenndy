@@ -34,3 +34,21 @@ int get_size(List* list){
     ^
 1 error generated.
 f5ffb67
+Sat May 17 19:43:04 -04 2025: 
+Compilation failed
+test.c:156:16: error: passing arguments to 'get_size' without a prototype is deprecated in all versions of C and is not supported in C2x [-Werror,-Wdeprecated-non-prototype]
+    if(get_size(adj) != 3){
+               ^
+test.c:157:86: error: passing arguments to 'get_size' without a prototype is deprecated in all versions of C and is not supported in C2x [-Werror,-Wdeprecated-non-prototype]
+        sprintf(msg,"la lista deberia tener tamanno 3 pero tiene tamanno %d",get_size(adj));
+                                                                                     ^
+2 errors generated.
+In file included from list.c:4:
+./list.h:26:5: error: a function declaration without a prototype is deprecated in all versions of C and is treated as a zero-parameter prototype in C2x, conflicting with a subsequent definition [-Werror,-Wdeprecated-non-prototype]
+int get_size();
+    ^
+list.c:19:5: note: conflicting prototype is here
+int get_size(List* list){
+    ^
+1 error generated.
+9b17875
