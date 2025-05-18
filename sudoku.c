@@ -149,25 +149,33 @@ int is_final(Node *n)
 
 Node *DFS(Node *initial, int *cont)
 {
-  Stack *stack = createStack();
-  push(stack, initial);
-  while (!is_empty(stack))
+  Stack *stack = createStack(); // Crea una pila para realizar la búsqueda en profundidad
+  push(stack, initial);         // Inserta el nodo inicial en la pila
+
+  while (!is_empty(stack)) // Mientras la pila no esté vacía
   {
-    Node *current = top(stack);
-    pop(stack);
-    (*cont)++;
-    if (is_final(current))
+    Node *current = top(stack); // Obtiene el nodo en la cima de la pila
+    pop(stack);                 // Elimina el nodo de la pila
+    (*cont)++;                  // Incrementa el contador de iteraciones
+
+    if (is_final(current)) // Verifica si el nodo actual es una solución
     {
-      return current; // Solución encontrada
+      return current; // Si es solución, retorna el nodo
     }
+
+    // Genera los nodos adyacentes (posibles movimientos válidos)
     List *adj_nodes = get_adj_nodes(current);
+
+    // Recorre todos los nodos adyacentes
     for (Node *node = first(adj_nodes); node != NULL; node = next(adj_nodes))
     {
-      push(stack, node);
+      push(stack, node); // Inserta cada nodo adyacente en la pila
     }
-    clean(adj_nodes);
+
+    clean(adj_nodes); // Libera la memoria de la lista de nodos adyacentes
   }
-  return NULL;
+
+  return NULL; // Si no se encuentra solución, retorna NULL
 }
 
 /*
