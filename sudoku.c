@@ -149,6 +149,24 @@ int is_final(Node *n)
 
 Node *DFS(Node *initial, int *cont)
 {
+  Stack *stack = createStack();
+  push(stack, initial);
+  while (!is_empty(stack))
+  {
+    Node *current = top(stack);
+    pop(stack);
+    (*cont)++;
+    if (is_final(current))
+    {
+      return current; // Solución encontrada
+    }
+    List *adj_nodes = get_adj_nodes(current);
+    for (Node *node = first(adj_nodes); node != NULL; node = next(adj_nodes))
+    {
+      push(stack, node);
+    }
+    clean(adj_nodes);
+  }
   return NULL;
 }
 
